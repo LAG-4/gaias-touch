@@ -1,10 +1,85 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
+}
+class FirebaseService {
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+
+  Future<List<String>> getArrayData(String ngo) async {
+    try {
+      DocumentSnapshot snapshot = await _firestore
+          .collection('ngo')
+          .doc(ngo)
+          .get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+
+        if (data != null && data.containsKey('sdg')) {
+          List<dynamic> dataArray = data['sdg'] ?? [];
+          List<String> stringArray = dataArray.cast<String>();
+          return stringArray;
+        } else {
+          print('Array field not found in the document');
+          return [];
+        }
+      } else {
+        print('Document does not exist');
+        return [];
+      }
+    } catch (e) {
+      print('Error retrieving data: $e');
+      return [];
+    }
+  }
+  Future<String> getNgoName(String ngo) async {
+    try {
+      DocumentSnapshot snapshot = await _firestore
+          .collection('ngo')
+          .doc(ngo)
+          .get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+
+        if (data != null && data.containsKey('name')) {
+          String name = data['name'] ?? '';
+          return name;
+        } else {
+          print('name field not found in the document');
+          return '';
+        }
+      } else {
+        print('Document does not exist');
+        return '';
+      }
+    } catch (e) {
+      print('Error retrieving data: $e');
+      return '';
+    }
+  }
+  Future<List<String>> getAllNgos() async {
+    try {
+      QuerySnapshot querySnapshot = await _firestore.collection('ngo').get();
+
+      List<String> ngos = [];
+
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        // Assuming the NGO ID is stored as the document ID
+        ngos.add(doc.id);
+      }
+
+      return ngos;
+    } catch (e) {
+      print('Error retrieving NGOs: $e');
+      return [];
+    }
+  }
 }
 
 class _HomePageState extends State<HomePage> {
@@ -27,6 +102,30 @@ class _HomePageState extends State<HomePage> {
     "assets/image 16.png",
     "assets/image 17.png",
   ];
+
+  void fetchData(String num) async {
+    FirebaseService firebaseService = FirebaseService();
+
+    List<String> ngoData = await firebaseService.getAllNgos();
+    List<String> names = [];
+    // Use arrayData as needed
+    print('NGO Data: $ngoData');
+    for(String ngo in ngoData)
+      {
+        List<String> arrayData = await firebaseService.getArrayData(ngo);
+        print('Array Data: $arrayData');
+        for(String ele in arrayData)
+          {
+            if(ele == num)
+              {
+                names.add(await firebaseService.getNgoName(ngo));
+                break;
+              }
+          }
+      }
+    print(names);
+
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,18 +151,22 @@ class _HomePageState extends State<HomePage> {
                    child: Image(image: AssetImage(imageList[0]),height: 90,),
                  onTap: (){
                      openDialog1();
+                     fetchData("1");
+
                  },
                ),
                InkWell(
                    child: Image(image: AssetImage(imageList[1]),height: 90,),
                  onTap: (){
                    openDialog2();
+                   fetchData("2");
                  },
                ),
                InkWell(
                  child: Image(image: AssetImage(imageList[2]),height: 90,),
                  onTap: (){
                    openDialog3();
+                   fetchData("3");
                  },
                ),
              ],
@@ -75,18 +178,22 @@ class _HomePageState extends State<HomePage> {
                   child: Image(image: AssetImage(imageList[3]),height: 90,),
                   onTap: (){
                     openDialog4();
+                    fetchData("4");
+
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[4]),height: 90,),
                   onTap: (){
                     openDialog5();
+                    fetchData("5");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[5]),height: 90,),
                   onTap: (){
                     openDialog6();
+                    fetchData("6");
                   },
                 ),
               ],
@@ -98,18 +205,21 @@ class _HomePageState extends State<HomePage> {
                   child: Image(image: AssetImage(imageList[6]),height: 90,),
                   onTap: (){
                     openDialog7();
+                    fetchData("7");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[7]),height: 90,),
                   onTap: (){
                     openDialog8();
+                    fetchData("8");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[8]),height: 90,),
                   onTap: (){
                     openDialog9();
+                    fetchData("9");
                   },
                 ),
               ],
@@ -121,18 +231,21 @@ class _HomePageState extends State<HomePage> {
                   child: Image(image: AssetImage(imageList[9]),height: 90,),
                   onTap: (){
                     openDialog10();
+                    fetchData("10");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[10]),height: 90,),
                   onTap: (){
                     openDialog11();
+                    fetchData("11");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[11]),height: 90,),
                   onTap: (){
                     openDialog12();
+                    fetchData("12");
                   },
                 ),
               ],
@@ -145,16 +258,19 @@ class _HomePageState extends State<HomePage> {
                   child: Image(image: AssetImage(imageList[12]),height: 90,),
                   onTap: (){
                     openDialog13();
+                    fetchData("13");
                   },
                 ),                InkWell(
                   child: Image(image: AssetImage(imageList[13]),height: 90,),
                   onTap: (){
                     openDialog14();
+                    fetchData("14");
                   },
                 ),                InkWell(
                   child: Image(image: AssetImage(imageList[14]),height: 90,),
                   onTap: (){
                     openDialog15();
+                    fetchData("15");
                   },
                 ),
               ],
@@ -166,12 +282,14 @@ class _HomePageState extends State<HomePage> {
                   child: Image(image: AssetImage(imageList[15]),height: 90,),
                   onTap: (){
                     openDialog16();
+                    fetchData("16");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[16]),height: 90,),
                   onTap: (){
                     openDialog17();
+                    fetchData("17");
                   },
                 ),
               ],
