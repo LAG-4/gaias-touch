@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "418393208802",
+    "project_id": "gaias-ce569",
+    "storage_bucket": "gaias-ce569.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:418393208802:android:2c59462267eabc8ea22bbb",
+        "android_client_info": {
+          "package_name": "com.example.gdsc"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA9EaU6-smXlW_pYnzA6Imjl2ixHRno5js"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
