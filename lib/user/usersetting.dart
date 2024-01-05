@@ -115,16 +115,103 @@ class SettingsUser extends StatelessWidget {
                             ),
                           )),
 
-                      Column(
-                        children: fetchData().entries.map((entry) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${entry.key}', style: TextStyle(fontSize: 20)),
-                              Text('${entry.value}', style: TextStyle(fontSize: 20)),
-                            ],
-                          );
-                        }).toList(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('Position', style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: 'Inter')),
+                          Text('Name', style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: 'Inter'),),
+                          Text('Points', style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20,
+                              fontFamily: 'Inter'),),
+                        ],
+                      ),
+                      SizedBox(height: 10,),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        1', style: TextStyle(fontSize: 20),),
+                          Text('Aryan', style: TextStyle(fontSize: 20),),
+                          Text('100', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        2', style: TextStyle(fontSize: 20),),
+                          Text('Nayan', style: TextStyle(fontSize: 20),),
+                          Text('90', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        3', style: TextStyle(fontSize: 20),),
+                          Text('Anas', style: TextStyle(fontSize: 20),),
+                          Text('70', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        4', style: TextStyle(fontSize: 20),),
+                          Text('RK', style: TextStyle(fontSize: 20),),
+                          Text('60', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        5', style: TextStyle(fontSize: 20),),
+                          Text('Krishna', style: TextStyle(fontSize: 20),),
+                          Text('50', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        6', style: TextStyle(fontSize: 20),),
+                          Text('Tanmay', style: TextStyle(fontSize: 20),),
+                          Text('40', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        7', style: TextStyle(fontSize: 20),),
+                          Text('Tushar', style: TextStyle(fontSize: 20),),
+                          Text('30', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        8', style: TextStyle(fontSize: 20),),
+                          Text('Pranav', style: TextStyle(fontSize: 20),),
+                          Text('20', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('        9', style: TextStyle(fontSize: 20),),
+                          Text('Ashwin', style: TextStyle(fontSize: 20),),
+                          Text('10', style: TextStyle(fontSize: 20),),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text('       10', style: TextStyle(fontSize: 20),),
+                          Text('Aman', style: TextStyle(fontSize: 20),),
+                          Text('0', style: TextStyle(fontSize: 20),),
+                        ],
                       ),
 
                     ],

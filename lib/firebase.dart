@@ -169,4 +169,8 @@ class FirebaseService {
       return '';
     }
   }
+  Future<String> getCurrentUser() async{
+    String user = FirebaseAuth.instance.currentUser as String;
+    return user;
+  }
 }
