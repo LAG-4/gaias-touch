@@ -1,86 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
+import '../firebase.dart';
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
-class FirebaseService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
-  Future<List<String>> getArrayData(String ngo) async {
-    try {
-      DocumentSnapshot snapshot = await _firestore
-          .collection('ngo')
-          .doc(ngo)
-          .get();
-
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-
-        if (data != null && data.containsKey('sdg')) {
-          List<dynamic> dataArray = data['sdg'] ?? [];
-          List<String> stringArray = dataArray.cast<String>();
-          return stringArray;
-        } else {
-          print('Array field not found in the document');
-          return [];
-        }
-      } else {
-        print('Document does not exist');
-        return [];
-      }
-    } catch (e) {
-      print('Error retrieving data: $e');
-      return [];
-    }
-  }
-  Future<String> getNgoName(String ngo) async {
-    try {
-      DocumentSnapshot snapshot = await _firestore
-          .collection('ngo')
-          .doc(ngo)
-          .get();
-
-      if (snapshot.exists) {
-        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
-
-        if (data != null && data.containsKey('name')) {
-          String name = data['name'] ?? '';
-          return name;
-        } else {
-          print('name field not found in the document');
-          return '';
-        }
-      } else {
-        print('Document does not exist');
-        return '';
-      }
-    } catch (e) {
-      print('Error retrieving data: $e');
-      return '';
-    }
-  }
-  Future<List<String>> getAllNgos() async {
-    try {
-      QuerySnapshot querySnapshot = await _firestore.collection('ngo').get();
-
-      List<String> ngos = [];
-
-      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-        // Assuming the NGO ID is stored as the document ID
-        ngos.add(doc.id);
-      }
-
-      return ngos;
-    } catch (e) {
-      print('Error retrieving NGOs: $e');
-      return [];
-    }
-  }
-}
 
 class _HomePageState extends State<HomePage> {
   List imageList=[
