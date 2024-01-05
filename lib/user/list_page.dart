@@ -58,14 +58,27 @@ class _ListPageState extends State<ListPage> {
             children: [
               Padding(
                 padding: const EdgeInsets.all(18.0),
-                child: Text(
-                  "ACTIVE NGO'S IN YOUR LOCATION: $userLocation",
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 25,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'InterBlack',
-                  ),
+                child: Column(
+                  children: [
+                    Text(
+                      "ACTIVE NGO'S IN YOUR LOCATION",
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'InterBlack',
+                      ),
+                    ),
+                    Text(
+                      userLocation!.toUpperCase(),
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'InterBlack',
+                      ),
+                    ),
+                  ],
                 ),
               ),
               StreamBuilder<QuerySnapshot>(
