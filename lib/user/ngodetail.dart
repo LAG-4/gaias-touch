@@ -55,31 +55,80 @@ class _NGODetailsPageState extends State<NGODetailsPage> {
           return Padding(
             padding: EdgeInsets.all(20.0),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Name: ', style: TextStyle( fontWeight: FontWeight.bold),),
-                    Text(
-                      '${widget.name}',
-
+                Card(
+                  elevation: 4,
+                  margin: EdgeInsets.symmetric(vertical: 8),
+                  child: Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Name:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          '${widget.name}',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Divider(),
+                        Text(
+                          'Description:',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18,
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          '$desc',
+                          style: TextStyle(fontSize: 16),
+                        ),
+                        Divider(),
+                        GestureDetector(
+                          onTap: () async {
+                            try {
+                              await initiateTransaction(upi);
+                            } catch (e) {
+                              print('Error: $e');
+                              // Handle transaction initiation error
+                            }
+                          },
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'UPI Id:',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 18,
+                                ),
+                              ),
+                              SizedBox(height: 4),
+                              Text(
+                                upi,
+                                style: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 16,
+                                  decoration: TextDecoration.underline,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
-                SizedBox(height: 10),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text('Description: ', style: TextStyle(fontWeight: FontWeight.bold),),
-                    Text(
-                      '$desc',
-                      style: TextStyle(fontSize: 16),
-                    ),
-                  ],
-                ),
-                GestureDetector(
-                  onTap: () async {
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () async {
                     try {
                       await initiateTransaction(upi);
                     } catch (e) {
@@ -87,30 +136,8 @@ class _NGODetailsPageState extends State<NGODetailsPage> {
                       // Handle transaction initiation error
                     }
                   },
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text('UPI Id: ', style: TextStyle(fontWeight: FontWeight.bold),),
-                      Text(
-                        upi,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                        ),
-                      ),
-                    ],
-                  ),
+                  child: Text("Pay Via GPay"),
                 ),
-                SizedBox(height: 20,),
-                ElevatedButton(onPressed: () async {
-                  try {
-                    await initiateTransaction(upi);
-                  } catch (e) {
-                    print('Error: $e');
-                    // Handle transaction initiation error
-                  }
-                }, child: Text("Pay Via GPay"))
               ],
             ),
           );
