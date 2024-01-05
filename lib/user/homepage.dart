@@ -32,29 +32,25 @@ class _HomePageState extends State<HomePage> {
     "assets/image 17.png",
   ];
 
-  void fetchData(String num) async {
+  Future<List<String>> fetchData(String num) async {
     FirebaseService firebaseService = FirebaseService();
 
     List<String> ngoData = await firebaseService.getAllNgos();
     final List<String> names = [];
-    // Use arrayData as needed
-    print('NGO Data: $ngoData');
-    for(String ngo in ngoData)
-      {
-        List<String> arrayData = await firebaseService.getArrayData(ngo);
-        print('Array Data: $arrayData');
-        for(String ele in arrayData)
-          {
-            if(ele == num)
-              {
-                names.add(await firebaseService.getNgoName(ngo));
-                break;
-              }
-          }
-      }
-    print(names);
 
+    for (String ngo in ngoData) {
+      List<String> arrayData = await firebaseService.getArrayData(ngo);
+      for (String ele in arrayData) {
+        if (ele == num) {
+          names.add(await firebaseService.getNgoName(ngo));
+          break;
+        }
+      }
+    }
+
+    return names;
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -78,24 +74,24 @@ class _HomePageState extends State<HomePage> {
              children: [
                InkWell(
                    child: Image(image: AssetImage(imageList[0]),height: 90,),
-                 onTap: (){
-                     openDialog1();
-                     fetchData("no poverty");
+                 onTap: () async {
+                   List<String> names = await fetchData("no poverty");
+                   openDialog(names,"1. NO POVERTY");
 
                  },
                ),
                InkWell(
                    child: Image(image: AssetImage(imageList[1]),height: 90,),
-                 onTap: (){
-                   openDialog2();
-                   fetchData("2");
+                 onTap: () async {
+                   List<String> names = await fetchData("zero hunger");
+                   openDialog(names,"2. ZERO HUNGER");
                  },
                ),
                InkWell(
                  child: Image(image: AssetImage(imageList[2]),height: 90,),
-                 onTap: (){
-                   openDialog3();
-                   fetchData("3");
+                 onTap: () async {
+                   List<String> names = await fetchData("good health & well-being");
+                   openDialog(names,"3. GOOD HEALTH & WELL-BEING");
                  },
                ),
              ],
@@ -105,24 +101,24 @@ class _HomePageState extends State<HomePage> {
               children: [
                 InkWell(
                   child: Image(image: AssetImage(imageList[3]),height: 90,),
-                  onTap: (){
-                    openDialog4();
-                    fetchData("4");
+                  onTap: () async {
+                    List<String> names = await fetchData("quality education");
+                    openDialog(names,"4. QUALITY EDUCATION");
 
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[4]),height: 90,),
-                  onTap: (){
-                    openDialog5();
-                    fetchData("5");
+                  onTap: () async {
+                    List<String> names = await fetchData("gender equality");
+                    openDialog(names,"5. GENDER EQUALITY");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[5]),height: 90,),
-                  onTap: (){
-                    openDialog6();
-                    fetchData("6");
+                  onTap: () async {
+                    List<String> names = await fetchData("clean water & sanitation");
+                    openDialog(names,"6. CLEAN WATER & SANITATION");
                   },
                 ),
               ],
@@ -132,23 +128,23 @@ class _HomePageState extends State<HomePage> {
               children: [
                 InkWell(
                   child: Image(image: AssetImage(imageList[6]),height: 90,),
-                  onTap: (){
-                    openDialog7();
-                    fetchData("7");
+                  onTap: () async {
+                    List<String> names = await fetchData("affordable & clean energy");
+                    openDialog(names,"7. AFFORDABLE & CLEAN ENERGY");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[7]),height: 90,),
-                  onTap: (){
-                    openDialog8();
-                    fetchData("8");
+                  onTap: () async {
+                    List<String> names = await fetchData("decent work & economic growth");
+                    openDialog(names,"8. DECENT WORK & ECONOMIC GROWTH");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[8]),height: 90,),
-                  onTap: (){
-                    openDialog9();
-                    fetchData("9");
+                  onTap: () async {
+                    List<String> names = await fetchData("industry, innovation & infrastructure");
+                    openDialog(names,"9. INDUSTRY, INNOVATION & INFRASTRUCTURE");
                   },
                 ),
               ],
@@ -158,23 +154,23 @@ class _HomePageState extends State<HomePage> {
               children: [
                 InkWell(
                   child: Image(image: AssetImage(imageList[9]),height: 90,),
-                  onTap: (){
-                    openDialog10();
-                    fetchData("10");
+                  onTap: () async {
+                    List<String> names = await fetchData("reduced inequalities");
+                    openDialog(names,"10. REDUCED INEQUALITIES");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[10]),height: 90,),
-                  onTap: (){
-                    openDialog11();
-                    fetchData("11");
+                  onTap: () async {
+                    List<String> names = await fetchData("sustainable cities & communities");
+                    openDialog(names,"11. SUSTAINABLE CITIES & COMMUNITIES");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[11]),height: 90,),
-                  onTap: (){
-                    openDialog12();
-                    fetchData("12");
+                  onTap: () async {
+                    List<String> names = await fetchData("responsible consumption & production");
+                    openDialog(names,"12. RESPONSIBLE CONSUMPTION & PRODUCTION");
                   },
                 ),
               ],
@@ -185,21 +181,21 @@ class _HomePageState extends State<HomePage> {
               children: [
                 InkWell(
                   child: Image(image: AssetImage(imageList[12]),height: 90,),
-                  onTap: (){
-                    openDialog13();
-                    fetchData("13");
+                  onTap: () async {
+                    List<String> names = await fetchData("climate action");
+                    openDialog(names,"13. CLIMATE ACTION");
                   },
                 ),                InkWell(
                   child: Image(image: AssetImage(imageList[13]),height: 90,),
-                  onTap: (){
-                    openDialog14();
-                    fetchData("14");
+                  onTap: () async {
+                    List<String> names = await fetchData("life below water");
+                    openDialog(names,"14. LIFE BELOW WATER");
                   },
                 ),                InkWell(
                   child: Image(image: AssetImage(imageList[14]),height: 90,),
-                  onTap: (){
-                    openDialog15();
-                    fetchData("15");
+                  onTap: () async {
+                    List<String> names = await fetchData("life on land");
+                    openDialog(names,"15. LIFE ON LAND");
                   },
                 ),
               ],
@@ -209,16 +205,16 @@ class _HomePageState extends State<HomePage> {
               children: [
                 InkWell(
                   child: Image(image: AssetImage(imageList[15]),height: 90,),
-                  onTap: (){
-                    openDialog16();
-                    fetchData("16");
+                  onTap: () async {
+                    List<String> names = await fetchData("peace, justice and strong institutions");
+                    openDialog(names,"16. PEACE, JUSTICE AND STRONG INSTITUTIONS");
                   },
                 ),
                 InkWell(
                   child: Image(image: AssetImage(imageList[16]),height: 90,),
-                  onTap: (){
-                    openDialog17();
-                    fetchData("17");
+                  onTap: () async {
+                    List<String> names = await fetchData("partnerships for the goals");
+                    openDialog(names,"17. PARTNERSHIPS FOR THE GOALS");
                   },
                 ),
               ],
@@ -229,533 +225,22 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-  Future openDialog1() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('1. NO POVERTY',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.redAccent,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'ActionAid', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'CARE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Oxfam', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Save the Children', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Smile Foundation', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-          ],
+  Future openDialog(List<String> names,String title) => showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      title: Text(title, style: TextStyle(color: Colors.white, fontFamily: 'InterBlack'),),
+      backgroundColor: Colors.redAccent,
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: names.map((name) => SizedBox(
+            width: double.infinity,
+            child: RoundedButtonWidget(buttonText: name, width: double.infinity, onpressed: () {}, onpressed2: () {},),
+          )).toList(),
+        ),
       ),
     ),
-  ));
-  Future openDialog2() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('2. ZERO HUNGER',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.amber.shade700,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'AP Foundation', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Goonj', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'ANNM Foun.', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Food Bank India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-            SizedBox(
-              width: double.infinity,
-              child: RoundedButtonWidget(buttonText: 'Feeding India ', width: double.infinity, onpressed: (){},onpressed2: (){},),
-            ),
-          ],
-      ),
-    ),
-  ));
-  Future openDialog3() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('3. GOOD HEALTH & WELL-BEING',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.green,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'BnM Foun.', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Smile Foundation', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'AP Foundation ', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'PE Foundation', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'SankaraEye Foun.', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog4() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('4. QUALITY EDUCATION',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.red.shade800,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Teach For India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'PE Foun. ', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Akanksha Found.', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'RTR India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Bhumi', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog5() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('5. GENDER EQUALITY',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.orange.shade600,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'BT India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Oxfam India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CREA', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CARE India ', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Jagori', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog6() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('6. CLEAN WATER & SANITATION',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.lightBlueAccent,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WaterAid India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WASH United ', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Water.org', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Gram Vikas', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Sulabh', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog7() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('7. AFFORDABLE & CLEAN ENERGY',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.amber,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'TERI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CEEW', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'PEG', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'SELCO', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Vasudha', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog8() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('8. DECENT WORK & ECONOMIC GROWTH',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.red.shade900,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'SEWA', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Pradan', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'GRAVIS', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CEC', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'ASA', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog9() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('9. INDUSTRY, INNOVATION & INFRASTRUCTURE',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.orange.shade700,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'ISABP', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CSE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CII', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'TERI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'DEG', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog10() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('10. REDUCED INEQUALITIES',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.pink,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Oxfam India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'ActionAid India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Save the Children', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CRY', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'PE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog11() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('11. SUSTAINABLE CITIES & COMMUNITIES',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.amber.shade500,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'TERI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CSE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Clean Air Asia', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'IIHS', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WRI India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog12() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('12. RESPONSIBLE CONSUMPTION & PRODUCTION',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.amber.shade500,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CSE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Toxics Link', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'IPCA', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WCSI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'TERI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog13() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('13. CLIMATE ACTION',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.green.shade900,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'THE CGI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CSE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WWF', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Greenpeace India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'IYCN', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog14() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('14. LIFE BELOW WATER',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.blue.shade700,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'The Nature', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WWF', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WTI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'RWMC', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'OCI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog15() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('15. LIFE ON LAND',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.lightGreen,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WWF', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WTI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Greenpeace India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'WCS', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CSE', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog17() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('17. PARTNERSHIPS FOR THE GOALS',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.deepPurple.shade900,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Social Justice', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'HRLN', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Navsarjan Trust', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: "People's Watch", width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CHRI', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
-  Future openDialog16() => showDialog(context: context, builder: (context)=>AlertDialog(
-    title: Text('16. PEACE, JUSTICE AND STRONG INSTITUTIONS',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack'),),
-    backgroundColor: Colors.blue.shade900,
-    content: SingleChildScrollView(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'CRY', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Oxfam India', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'Save the Children', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'APF', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-          SizedBox(
-            width: double.infinity,
-            child: RoundedButtonWidget(buttonText: 'PEF', width: double.infinity, onpressed: (){},onpressed2: (){},),
-          ),
-        ],
-      ),
-    ),
-  ));
+  );
 }
 class RoundedButtonWidget extends StatelessWidget {
   final String buttonText;
