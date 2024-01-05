@@ -143,4 +143,30 @@ class FirebaseService {
       return '';
     }
   }
+  Future<String> getUserLocation(String user) async {
+    try {
+      DocumentSnapshot snapshot = await _firestore
+          .collection('users')
+          .doc(user)
+          .get();
+
+      if (snapshot.exists) {
+        Map<String, dynamic>? data = snapshot.data() as Map<String, dynamic>?;
+
+        if (data != null && data.containsKey('loc')) {
+          String name = data['loc'] ?? '';
+          return name;
+        } else {
+          print('location field not found in the document');
+          return '';
+        }
+      } else {
+        print('Document does not exist');
+        return '';
+      }
+    } catch (e) {
+      print('Error retrieving data: $e');
+      return '';
+    }
+  }
 }
