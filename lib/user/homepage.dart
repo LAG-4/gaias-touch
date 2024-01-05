@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
     FirebaseService firebaseService = FirebaseService();
 
     List<String> ngoData = await firebaseService.getAllNgos();
-    List<String> names = [];
+    final List<String> names = [];
     // Use arrayData as needed
     print('NGO Data: $ngoData');
     for(String ngo in ngoData)
@@ -80,7 +80,7 @@ class _HomePageState extends State<HomePage> {
                    child: Image(image: AssetImage(imageList[0]),height: 90,),
                  onTap: (){
                      openDialog1();
-                     fetchData("1");
+                     fetchData("no poverty");
 
                  },
                ),
