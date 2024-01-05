@@ -114,18 +114,18 @@ class SettingsUser extends StatelessWidget {
                               ],
                             ),
                           )),
-
-                      Column(
-                        children: fetchData().entries.map((entry) {
-                          return Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('${entry.key}', style: TextStyle(fontSize: 20)),
-                              Text('${entry.value}', style: TextStyle(fontSize: 20)),
-                            ],
-                          );
-                        }).toList(),
-                      ),
+                      //
+                      // Column(
+                      //   children: fetchData().entries.map((entry) {
+                      //     return Row(
+                      //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      //       children: [
+                      //         Text('${entry.key}', style: TextStyle(fontSize: 20)),
+                      //         Text('${entry.value}', style: TextStyle(fontSize: 20)),
+                      //       ],
+                      //     );
+                      //   }).toList(),
+                      // ),
 
                     ],
                   ),
