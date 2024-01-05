@@ -1,5 +1,7 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:gdsc/firebase.dart';
 import 'package:upi_india/upi_india.dart';
 
 class NGODetailsPage extends StatefulWidget {
@@ -13,6 +15,8 @@ class NGODetailsPage extends StatefulWidget {
 
 class _NGODetailsPageState extends State<NGODetailsPage> {
   final UpiIndia _upiIndia = UpiIndia();
+  final FirebaseAuth _auth = FirebaseAuth.instance;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<UpiResponse> initiateTransaction(String upi) async {
     return _upiIndia.startTransaction(
@@ -130,6 +134,14 @@ class _NGODetailsPageState extends State<NGODetailsPage> {
                 ElevatedButton(
                   onPressed: () async {
                     try {
+
+                      String user = FirebaseService().getCurrentUser() as String;
+                      int currPts = FirebaseService().getUserPoint(user) as int;
+                      currPts = currPts + 10;
+                      print("he;;p");
+                      await _firestore.collection('users').doc(user).update({
+                        'points': currPts,
+                      });
                       await initiateTransaction(upi);
                     } catch (e) {
                       print('Error: $e');
