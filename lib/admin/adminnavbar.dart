@@ -81,7 +81,7 @@ class _AdminNavState extends State<AdminNav> {
               ),
               BottomNavyBarItem(
                 title: Text(
-                  "NGO's LIST",
+                  "ADD NGO",
                   style: TextStyle(
                     fontFamily: 'Inter',
                   ),

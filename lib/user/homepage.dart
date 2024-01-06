@@ -263,17 +263,12 @@ class RoundedButtonWidget extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-                color: Colors.black26, offset: Offset(0, 4), blurRadius: 5.0)
+              color: Colors.black26,
+              offset: Offset(0, 4),
+              blurRadius: 5.0,
+            )
           ],
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            stops: [0.8, 1.0],
-            colors: [
-              Colors.green,
-              Colors.green.shade50,
-            ],
-          ),
+          color: Colors.green,
           borderRadius: BorderRadius.circular(10),
         ),
         child: ElevatedButton(
@@ -283,41 +278,57 @@ class RoundedButtonWidget extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20.0),
               ),
             ),
-            minimumSize: MaterialStateProperty.all(Size(width, 50)),
-            backgroundColor:
-            MaterialStateProperty.all(Colors.transparent),
-            // elevation: MaterialStateProperty.all(3),
-            shadowColor:
-            MaterialStateProperty.all(Colors.transparent),
+            padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+              EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            ),
+            minimumSize: MaterialStateProperty.all<Size>(Size(150, 50)), // Set a default size
+            backgroundColor: MaterialStateProperty.all<Color>(
+              Colors.transparent,
+            ),
+            shadowColor: MaterialStateProperty.all<Color>(
+              Colors.transparent,
+            ),
           ),
           onPressed: () {
             onpressed();
           },
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 10,
-              bottom: 10,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Expanded(
+                child: Text(
                   buttonText,
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
                   style: TextStyle(
                     fontSize: 12,
-                    // fontWeight: FontWeight.w700,
                     color: Colors.white,
                   ),
                 ),
-                ElevatedButton(
-                    onPressed: (){onpressed2;}, child: Text('CONTACT',style: TextStyle(color: Colors.white,fontFamily: 'InterBlack',fontSize: 10),),
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Colors.teal.shade300)),
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  onpressed2;
+                },
+                child: Text(
+                  'CONTACT',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'InterBlack',
+                    fontSize: 10,
+                  ),
                 ),
-              ],
-            ),
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    Colors.teal.shade300,
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ),
     );
+
   }
 }

@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 class UploadPage extends StatefulWidget {
   const UploadPage({Key? key}) : super(key: key);
@@ -14,10 +15,33 @@ class _UploadPageState extends State<UploadPage> {
   final TextEditingController _itemController = TextEditingController();
   final TextEditingController _imgController = TextEditingController();
 
+  Future<void> _signOut(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // Navigate back to the login or initial screen after logout
+      Navigator.of(context).popUntil((route) => route.isFirst);
+    } catch (e) {
+      print('Error signing out: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        actions: [
+          Row(
+            children: [
+              Text('Logout'),
+              IconButton(
+                onPressed: () {
+                  _signOut(context);
+                },
+                icon: Icon(Icons.logout_rounded),
+              ),
+            ],
+          )
+        ],
         shape: Border(
           bottom: BorderSide(width: 3),
         ),

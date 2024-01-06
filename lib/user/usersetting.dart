@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../firebase.dart';
 
 class SettingsUser extends StatelessWidget {
   const SettingsUser({Key? key}) : super(key: key);
+  _launchURL() async {
+    const url = 'http://172.18.108.215:8501';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 
   Future<Map<String, dynamic>> _getUserInfo() async {
     try {
@@ -105,6 +114,9 @@ class SettingsUser extends StatelessWidget {
                 padding: const EdgeInsets.all(18.0),
                 child: Column(
                   children: [
+                    ElevatedButton(onPressed: (){
+                      _launchURL();
+                    }, child: Text('Chat With An AI')),
                     Card(
                       margin: EdgeInsets.all(16.0),
                       child: Padding(

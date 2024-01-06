@@ -135,13 +135,6 @@ class _NGODetailsPageState extends State<NGODetailsPage> {
                   onPressed: () async {
                     try {
 
-                      String user = FirebaseService().getCurrentUser() as String;
-                      int currPts = FirebaseService().getUserPoint(user) as int;
-                      currPts = currPts + 10;
-                      print("he;;p");
-                      await _firestore.collection('users').doc(user).update({
-                        'points': currPts,
-                      });
                       await initiateTransaction(upi);
                     } catch (e) {
                       print('Error: $e');
