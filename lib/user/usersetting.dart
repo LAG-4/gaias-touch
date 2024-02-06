@@ -7,8 +7,16 @@ import '../firebase.dart';
 
 class SettingsUser extends StatelessWidget {
   const SettingsUser({Key? key}) : super(key: key);
-  _launchURL() async {
-    const url = 'http://172.18.108.215:8501';
+  _launchURL1() async {
+    const url = 'http://10.56.8.111:8501';
+    if (await canLaunch(url)) {
+      await launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+  _launchURL2() async {
+    const url = 'https://we-chat-sinisterdaddys-projects.vercel.app/';
     if (await canLaunch(url)) {
       await launch(url);
     } else {
@@ -115,7 +123,10 @@ class SettingsUser extends StatelessWidget {
                 child: Column(
                   children: [
                     ElevatedButton(onPressed: (){
-                      _launchURL();
+                      _launchURL2();
+                    }, child: Text('Chat With An NGO')),
+                    ElevatedButton(onPressed: (){
+                      _launchURL1();
                     }, child: Text('Chat With An AI')),
                     Card(
                       margin: EdgeInsets.all(16.0),
